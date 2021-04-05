@@ -5,17 +5,17 @@
 package GameOfLife;
 
 import gui.Window;
+// import board.*;
 
 public class App {
 
-    enum State {PAUSED, DRAWING, RUNNING};
     static State currState = State.PAUSED;
+
     public static void main(String[] args) {
-        int size = 250;
-        Window window = new Window("Empty", 1000, 1000);
+        Window window = new Window("Ciao", 1000, 1000);
+        board.VisualBoard b = new board.VisualBoard(new board.ThreadedBoard(100, 100), window);
         window.open();
-        VisualBoard b = new VisualBoard(size, size, window);
-        b.setRandomBoard();
+        b.init();
         while (window.isOpen()) {
             currState = Input.getNextState(b, currState);
             if (currState == State.RUNNING) {
