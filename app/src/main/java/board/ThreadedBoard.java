@@ -6,7 +6,7 @@ import java.util.concurrent.RecursiveAction;
 public class ThreadedBoard extends Board {
 
     protected ForkJoinPool fjpool;
-    protected int cutoff = 100000;
+    protected int cutoff = 25;
 
     public ThreadedBoard(int width, int height) {
         super(width, height);
@@ -21,7 +21,6 @@ public class ThreadedBoard extends Board {
 
     @Override
     public void update() {
-        // backBuffer = new boolean[width][height]; // FIXME this should not be necessary
         fjpool.invoke(new UpdateBoard(this, 0, width, 0, height, cutoff));
         swapBuffers();
     }  
@@ -54,7 +53,6 @@ class UpdateBoard extends RecursiveAction {
                 }
             }
         } else {
-            // TODO: fix this mess / make it elegant
             UpdateBoard t1, t2;
             if (deltaX > deltaY) {
                 int mid = (x1 + x2) / 2;

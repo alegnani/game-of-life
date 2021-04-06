@@ -13,7 +13,7 @@ public class App {
 
     public static void main(String[] args) {
         Window window = new Window("Ciao", 1000, 1000);
-        board.VisualBoard b = new board.VisualBoard(new board.ThreadedBoard(100, 100), window);
+        board.VisualBoard b = new board.VisualBoard(new board.ThreadedBoard(100, 100, 16, 2048), window);
         window.open();
         b.init();
         while (window.isOpen()) {
