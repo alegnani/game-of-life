@@ -6,7 +6,7 @@ import java.util.concurrent.RecursiveAction;
 public class ThreadedBoard extends Board {
 
     protected ForkJoinPool fjpool;
-    protected int cutoff = 25;
+    protected int cutoff = 2048;
 
     public ThreadedBoard(int width, int height) {
         super(width, height);
