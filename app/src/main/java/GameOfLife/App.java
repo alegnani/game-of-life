@@ -1,13 +1,14 @@
 package GameOfLife;
 
+import board.ThreadedBoard;
 import simulation.*;
 
 public class App {
 
     public static void main(String[] args) {
-        Simulation s = new Simulation(Simulation.Mode.THREADED);
-        s.setWindowParameters(1440, 1300);
-        s.setBoardParameters(1440, 1440, 128, 10000);
+        BitMap b = new ThreadedBoard(100, 100);
+        Simulation s = new Simulation(b);
+        s.setWindowParameters(900, 900);
         s.start();
     }
 

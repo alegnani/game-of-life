@@ -5,9 +5,15 @@ import gui.Window;
 public class Input {
 
     enum Mode {PAINTING, ERASING, NAN};
+    private Window window;
+    private BitMap board;
 
-    public static void getDrawingInput(board.VisualBoard b) {
-        Window window = b.getWindow();
+    public Input(Window window, BitMap board) {
+        this.window = window;
+        this.board = board;
+    }
+
+    public void getDrawingInput(double eW, double eH) { 
         Mode mode;
         if(window.isLeftMouseButtonPressed())
             mode = Mode.PAINTING;
@@ -16,14 +22,13 @@ public class Input {
         else 
             mode = Mode.NAN;
         if (mode != Mode.NAN) {
-            int x = (int) (window.getMouseX() / b.entityWidth);
-            int y = (int) (window.getMouseY() / b.entityHeight);
-            b.setEntity(x, y, mode == Mode.PAINTING ? true : false);
+            int x = (int) (window.getMouseX() / eW);
+            int y = (int) (window.getMouseY() / eH);
+            board.setEntity(x, y, mode == Mode.PAINTING ? true : false);
         }
     }
 
-    public static State getNextState(board.VisualBoard b, State currState) {
-        Window window = b.getWindow();
+    public State getNextState(State currState) {
         State ret;
         if (currState == State.PAUSED && window.wasKeyTyped("P") 
             || currState == State.DRAWING && window.wasKeyTyped("E"))
@@ -38,9 +43,8 @@ public class Input {
         return ret;
     }
 
-    public static void steppedExecution(board.VisualBoard b) {
-        Window window = b.getWindow();
+    public void steppedExecution() {
         if (window.wasKeyTyped("right"))
-            b.update();
+            board.update();
     }
 }

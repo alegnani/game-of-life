@@ -15,5 +15,4 @@ public class SequentialBoard extends Board{
         }
         swapBuffers();
     }
-    
 }

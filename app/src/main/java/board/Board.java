@@ -1,8 +1,9 @@
 package board;
 
 import java.util.Random;
+import simulation.BitMap;
 
-public abstract class Board {
+public abstract class Board implements BitMap {
     protected boolean[][] frontBuffer, backBuffer;
     protected int width, height;
     protected int[] rules = {2, 3, 3};
@@ -65,7 +66,23 @@ public abstract class Board {
 
     public abstract void update();
 
-    protected void setEntity(int x, int y, boolean value) {
+    public boolean[][] getBitMap() {
+        return frontBuffer;
+    }
+
+    public void init() {
+        setRandomBoard();
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setEntity(int x, int y, boolean value) {
         frontBuffer[x][y] = value;
     }
 

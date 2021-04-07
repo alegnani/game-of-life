@@ -1,24 +1,20 @@
 package simulation;
 
 import gui.Window;
-import board.VisualBoard;
 
 public class Output {
 
-    private State state;
     private Window window;
-    private VisualBoard board;
     private int frameCount = 0;
     private long millis;
     private int currentFps = 0;
 
-    public Output(Window w, VisualBoard b) {
+    public Output(Window w) {
         window = w;
-        board = b;
         millis = System.currentTimeMillis();
     }
 
-    public void printState(State state) {
+    public void printState(State state, double eW, double eH) {
         String str;
         if (state == State.RUNNING) {
             str = "Running @ " + currentFps + " FPS";
@@ -30,8 +26,8 @@ public class Output {
         window.setFontSize((int) window.getHeight() / 33);
         window.setColor(255, 0, 255);
 
-        double x = 2 * board.entityWidth;
-        double y = window.getHeight() - 2 * board.entityHeight;
+        double x = 2 * eW;
+        double y = window.getHeight() - 2 * eH;
 
         window.setFontSize(20);
         window.drawString(str, x, y);
